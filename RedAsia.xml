@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BIF VERSION="0.3"  xmlns="http://www.cs.ubc.ca/labs/lci/fopi/ve/XMLBIFv0_3"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.cs.ubc.ca/labs/lci/fopi/ve/XMLBIFv0_3 http://www.cs.ubc.ca/labs/lci/fopi/ve/XMLBIFv0_3/XMLBIFv0_3.xsd">
+<NETWORK>
+<NAME>Asia Bayesian Network</NAME>
+<PROPERTY>reference = http://www.norsys.com/tutorials/netica/secA/tut_A1.htm</PROPERTY>
+<PROPERTY>detailed = It is a simplified version of a network that could be used to diagnose patients arriving at a clinic. Each node in the network corresponds to some condition of the patient, for example, "Visit to Asia" indicates whether the patient recently visited Asia. Thus, smoking increases the chances of getting lung cancer and of getting bronchitis. Both lung cancer and bronchitis increase the chances of getting dyspnea (shortness of breath). Both lung cancer and tuberculosis, but not usually bronchitis, can cause an abnormal lung x-ray. And so on.</PROPERTY>
+<PROPERTY>short = Modificación de este problema, adaptada a 10 nodos. It is an example which is popular for introducing Bayes nets and is from Lauritzen and Spiegelhalter88</PROPERTY>
+
+<VARIABLE TYPE="nature">
+	<NAME>VisittoAsia</NAME>
+	<OUTCOME>Visit</OUTCOME>
+	<OUTCOME>Not visit</OUTCOME>
+	<PROPERTY>position = (7783.00634765625, 5056.404296875)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>Tuberculosis</NAME>
+	<OUTCOME>Present</OUTCOME>
+	<OUTCOME>Absent</OUTCOME>
+	<PROPERTY>position = (7784.32470703125, 5183.5380859375)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>Smoking</NAME>
+	<OUTCOME>Smoker</OUTCOME>
+	<OUTCOME>NonSmoker</OUTCOME>
+	<PROPERTY>position = (7484.65380859375, 5060.12109375)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>LungCancer</NAME>
+	<OUTCOME>Present</OUTCOME>
+	<OUTCOME>Absent</OUTCOME>
+	<PROPERTY>position = (7632.94921875, 5188.39306640625)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>Bronchitis</NAME>
+	<OUTCOME>Present</OUTCOME>
+	<OUTCOME>Absent</OUTCOME>
+	<PROPERTY>position = (7480.0869140625, 5281.84130859375)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>TuberculosisorCancer</NAME>
+	<OUTCOME>T</OUTCOME>
+	<OUTCOME>F</OUTCOME>
+	<PROPERTY>position = (7635.51904296875, 5284.96826171875)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>XRayResult</NAME>
+	<OUTCOME>Abnormal</OUTCOME>
+	<OUTCOME>Normal</OUTCOME>
+	<PROPERTY>position = (7783.97265625, 5431.24169921875)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>Dyspnea</NAME>
+	<OUTCOME>Present</OUTCOME>
+	<OUTCOME>Absent</OUTCOME>
+	<PROPERTY>position = (7634.77392578125, 5433.04833984375)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>Pollution</NAME>
+	<OUTCOME>Present</OUTCOME>
+	<OUTCOME>Absent</OUTCOME>
+	<PROPERTY>position = (7631.1044921875, 5058.05908203125)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>Enphysema</NAME>
+	<OUTCOME>Present</OUTCOME>
+	<OUTCOME>Absent</OUTCOME>
+	<PROPERTY>position = (7481.05078125, 5437.75830078125)</PROPERTY>
+</VARIABLE>
+
+<DEFINITION>
+	<FOR>VisittoAsia</FOR>
+	<TABLE>0.02 0.98</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>Tuberculosis</FOR>
+	<GIVEN>VisittoAsia</GIVEN>
+	<TABLE>0.5 0.5 0.85 0.15</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>Smoking</FOR>
+	<TABLE>0.3 0.7</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>LungCancer</FOR>
+	<GIVEN>Smoking</GIVEN>
+	<GIVEN>Pollution</GIVEN>
+	<TABLE>0.05 0.95 0.03 0.97 0.75 0.25 0.9 0.1</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>Bronchitis</FOR>
+	<GIVEN>Smoking</GIVEN>
+	<TABLE>0.9 0.1 0.01 0.99</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>TuberculosisorCancer</FOR>
+	<GIVEN>Tuberculosis</GIVEN>
+	<GIVEN>LungCancer</GIVEN>
+	<TABLE>0.99 0.01 0.05 0.95 0.5 0.5 0.6 0.4</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>XRayResult</FOR>
+	<GIVEN>TuberculosisorCancer</GIVEN>
+	<TABLE>0.75 0.25 0.01 0.99</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>Dyspnea</FOR>
+	<GIVEN>Bronchitis</GIVEN>
+	<GIVEN>TuberculosisorCancer</GIVEN>
+	<TABLE>0.35 0.65 0.9 0.1 0.1 0.9 0.7 0.3</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>Pollution</FOR>
+	<TABLE>0.9 0.1</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>Enphysema</FOR>
+	<GIVEN>Bronchitis</GIVEN>
+	<TABLE>0.88 0.12 0.0 1.0</TABLE>
+</DEFINITION>
+</NETWORK>
+</BIF>
